@@ -1,11 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-import Input from './component/Input'
-import Textbox from "./component/Input/textbox";
-import Button from "./component/Input/button";
 import {useState} from "react";
-import Header from "./component/Header";
-import Tasks from "./component/Tasks"
+import Tasks from "./component/TaskTracker/tasks.json";
+import TaskTracker from './component/TaskTracker';
 
 // function App(props) {
 
@@ -25,13 +21,14 @@ import Tasks from "./component/Tasks"
 
 // }
 
+
 const App = () => {
         return (
 <>
-<Header title={"Task Tracker"}/>
-    <Tasks />
+    <TaskTracker tasks={Tasks}/>
 </>
         );
 
 }
+
 export default App;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 const tasks = [
     {'name' : 'task1',
@@ -9,6 +9,7 @@ const tasks = [
         'id' : 3},
 ]
 const Tasks = () => {
+
 return (
     <>
         {tasks.map((task) => (<h3>{task.name}</h3>))}
