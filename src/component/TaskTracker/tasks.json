@@ -1,18 +1,18 @@
 [
   {
-    "name": "task1",
+    "name": "Task 1",
     "id" : 1,
     "description": "drink milk",
     "reminder": false
   },
   {
-    "name": "task2",
+    "name": "Task 2",
     "id" : 2,
     "description": "play games",
     "reminder": false
   },
   {
-    "name": "task3",
+    "name": "Task 3",
     "id" : 3,
     "description": "dance around",
     "reminder": false

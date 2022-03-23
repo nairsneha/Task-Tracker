@@ -1,29 +1,28 @@
 import React, {useState} from "react";
 import TaskMaker from "./TaskMaker";
+import addTask from "./addTask";
 
 const TaskTracker = (props) => {
 
     const [tasks, setTasks] = useState(
-        [
-            {
-                "name": "task1",
-                "id" : 1,
-                "description": "drink milk",
-                "reminder": false
-            },
-            {
-                "name": "task2",
-                "id" : 2,
-                "description": "play games",
-                "reminder": false
-            },
-            {
-                "name": "task3",
-                "id" : 3,
-                "description": "dance around",
-                "reminder": false
-            }
-        ]
+        props.tasks
+    );
+
+    const [addTaskButton, setAddTaskBtn] = useState(
+        [<button id={'add-task-btn'} type='submit' className={'btn btn-secondary btn-block'} onClick={() => addNewTask()}> Add Task </button> ]
+    );
+
+    const [createTaskButton, setCreateTaskBtn] = useState(
+
+        [<button id={'create-task-btn'} className={'btn btn-secondary btn-block'} onClick={() => renderForm()}> + </button> ]
+    );
+
+    const [form, setForm] = useState(
+         []
+    );
+
+    const [sign, setSign] = useState(
+        ''
     );
 
     const deleteTask = (id) => {
@@ -36,15 +35,58 @@ const TaskTracker = (props) => {
         setTasks(tasks.map((task) => task.id=== id ? {...task, reminder: !task.reminder} : task))
     }
 
+    const renderForm = () => {
+        // setCreateTaskBtn(prevState => ({
+        //     ...prevState,
+        //     'btn': []
+        // }));
+
+        setForm(form.concat(<form className='add-form'><div className='form-control'>
+        <div id={'name-id'}>
+                <label>Enter Task Name: </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input placeholder={'Your text here'}/>
+            </div>
+            <div id={'id-id'}>
+                <label>Enter Task Id: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input placeholder={'Your text here'}/>
+            </div>
+            <div id={'desc-id'}>
+                <label>Enter Task Description: </label>&nbsp;&nbsp;
+                <input placeholder={'Your text here'}/>
+            </div>
+            <input type='text' value={sign} onChange={(e) => setSign(e.target.value)}/>
+            {addTaskButton}
+        </div> </form>
+    ));
+    }
+
+    const addNewTask = () => {
+
+        document.getElementById('add-task-btn').remove();
+        document.getElementById('name-id').remove();
+        document.getElementById('id-id').remove();
+        document.getElementById('desc-id').remove();
+
+         form.setState(this.getInitialState());
+
+        setForm(form.concat(<div>
+            <button id={'create-task-btn'} className={'btn btn-secondary btn-block'} onClick={() => renderForm()}> + </button>
+        </div>));
+    }
+
     return(
         <>
-            {tasks.map((task,index) => {
+            {tasks.map((task, index) => {
                 return (
                     <>
                         <TaskMaker task = {task} onDelete= {() => deleteTask(task.id)} onToggle={() => toggleReminder(task.id)}/>
                     </>
                 );
             })}
+
+            {/*{createTaskButton}*/}
+            <button id={'create-task-btn'} className={'btn btn-secondary btn-block'} onClick={() => renderForm()}> + </button>
+            {form}
         </>
     );
 
